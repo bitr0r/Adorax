@@ -1,0 +1,29 @@
+MAKE = @MAKE_PROG@
+ARCH = @SYS_ARCH@
+SYS_CFLAGS = @SYS_CFLAGS@
+BOOT_DIR = @BOOTDIR@
+ISO = @ISO@
+
+.PHONY: all
+all: sys iso
+
+.PHONY: sys
+sys:
+	cd sys/; $(MAKE) MAKE=$(MAKE) ARCH=$(ARCH) SYS_CFLAGS="$(SYS_CFLAGS)"
+
+.PHONY: iso
+iso:
+	mkdir -p iso_root/boot/
+	cp data/boot/limine.conf $(BOOT_DIR)/limine-bios.sys \
+        $(BOOT_DIR)/limine-bios-cd.bin $(BOOT_DIR)/limine-uefi-cd.bin iso_root/
+	cp sys/arch/$(ARCH)/adorax.sys iso_root/boot/
+	xorriso -as mkisofs -b limine-bios-cd.bin -no-emul-boot -boot-load-size 4\
+		-boot-info-table --efi-boot limine-uefi-cd.bin -efi-boot-part \
+		--efi-boot-image --protective-msdos-label iso_root/ -o $(ISO) 1>/dev/null
+	rm -rf iso_root
+
+.PHONY: distclean
+distclean:
+	rm -rf autom4te.cache
+	rm -f config.status config.log
+	rm -f Makefile

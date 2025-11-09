@@ -1,0 +1,9 @@
+/autom4te.cache
+/Makefile
+/configure
+/stand
+*.log
+*.status
+*.iso
+*.o
+*.d

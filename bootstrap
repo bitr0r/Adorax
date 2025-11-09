@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ ! -d stand/limine ]
+then
+	git clone https://github.com/limine-bootloader/limine.git --branch=v9.3.0-binary --depth=1 stand/limine/
+fi
+autoconf
