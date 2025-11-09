@@ -14,8 +14,8 @@ SYS_AMD64_CFLAGS="-mno-80387 -mno-mmx -mno-3dnow -mno-sse -mno-sse2 -mno-red-zon
 
 # Kernel CFLAGS
 SYS_CFLAGS="-nostdinc -nostdlib -Werror=implicit -Werror=implicit-function-declaration \\
-			-Werror=implicit-int -Werror=int-conversion -Werror=missing-prototypes -pedantic \\
-			$SYS_AMD64_CFLAGS"
+			-Werror=implicit-int -Werror=int-conversion -Werror=missing-prototypes \\
+            $SYS_AMD64_CFLAGS"
 
 
 AC_SUBST(MAKE_PROG,  [$MAKE_PROG])
