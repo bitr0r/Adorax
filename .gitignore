@@ -2,6 +2,7 @@
 /Makefile
 /configure
 /stand
+*.sys
 *.log
 *.status
 *.iso
