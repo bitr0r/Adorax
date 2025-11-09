@@ -27,3 +27,7 @@ distclean:
 	rm -rf autom4te.cache
 	rm -f config.status config.log
 	rm -f Makefile
+
+.PHONY: run
+run:
+	qemu-system-x86_64 -cdrom $(ISO) -m 2G -monitor stdio
