@@ -2,7 +2,7 @@ CFILES = $(shell find . -name "*.c")
 CFLAGS = $(SYS_CFLAGS) -MMD
 OFILES = $(CFILES:.c=.o)
 DFILES = $(CFILES:.c=.d)
-CFLAGS = -I../target/include/ $(SYS_CFLAGS)
+CFLAGS = -I../target/include/ -I../../sys/include/ $(SYS_CFLAGS)
 CC = clang
 
 .PHONY: all

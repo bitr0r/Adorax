@@ -75,6 +75,7 @@ GDTR:
  * ENTRYPOINT
  */
 _start:
+    mov %ebx, mbptr
     call zero_tables
     call link_tables
 
@@ -176,7 +177,11 @@ thunk64:
     xor %rbp, %rbp      /* Terminate callstack */
     mov $stack, %rsp    /* Set stack base */
     add $4095, %rsp     /* Adjust to stack top */
+    mov mbptr, %rdi     /* Pass the multiboot info */
     jmp kentry          /* Jump to kernel */
+
+    .section .data
+mbptr: .quad 0
 
     .section .bss
     .align 16
