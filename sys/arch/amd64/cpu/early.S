@@ -164,6 +164,7 @@ zero_tables:
     retl
 
     .code64
+    .extern kentry
 thunk64:
     mov $0x10, %ax
     mov %ax, %ds
@@ -172,4 +173,11 @@ thunk64:
     mov %ax, %gs
     mov %ax, %ss
 
-    jmp thunk64
+    xor %rbp, %rbp      /* Terminate callstack */
+    mov $stack, %rsp    /* Set stack base */
+    add $4095, %rsp     /* Adjust to stack top */
+    jmp kentry          /* Jump to kernel */
+
+    .section .bss
+    .align 16
+stack: .fill 4096, 1, 0

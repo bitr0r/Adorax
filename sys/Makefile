@@ -3,8 +3,12 @@ SYS_CFLAGS =
 MAKE =
 
 .PHONY: all
-all: target arch
+all: target kern arch
 	rm -rf target/
+
+.PHONY: kern
+kern:
+	cd kern/; $(MAKE) SYS_CFLAGS="$(SYS_CFLAGS)"
 
 .PHONY: arch
 arch:
